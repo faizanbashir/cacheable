@@ -1,0 +1,28 @@
+{
+    "name": "faizanbashir/cacheable",
+    "description": "Russian Doll Caching for Laravel.",
+    "license": "MIT",
+    "keywords": ["laravel", "cache"],
+    "authors": [
+        {
+            "name": "Faizan Bashir",
+            "email": "faizan.ibn.bashir@gmail.com"
+        }
+    ],
+    "require": {
+        "illuminate/support": "^5.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Faizanbashir\\Cacheable\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "classmap": ["tests/TestCase.php"]
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.2",
+        "illuminate/database": "^5.1",
+        "illuminate/cache": "^5.1"
+    }
+}
