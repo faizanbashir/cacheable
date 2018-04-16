@@ -1,6 +1,6 @@
 {
     "name": "faizanbashir/cacheable",
-    "description": "Russian Doll Caching for Laravel.",
+    "description": "Caching for Laravel.",
     "license": "MIT",
     "keywords": ["laravel", "cache"],
     "authors": [
