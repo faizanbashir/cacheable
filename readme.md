@@ -1,8 +1,6 @@
-# Matryoshka
+# Cacheable
 
-Matryoshka is a package for Laravel that provides Russian-Doll caching for your view logic.
-
-> Want to learn how this exact package was made from scratch? [See Laracasts.com](https://laracasts.com/series/russian-doll-caching-in-laravel).
+Cacheable is a package for Laravel that provides caching for your view logic.
 
 ## Installation
 
@@ -11,7 +9,7 @@ Matryoshka is a package for Laravel that provides Russian-Doll caching for your 
 From the command line, run:
 
 ```
-composer require laracasts/matryoshka
+composer require faizanbashir/cacheable
 ```
 
 ### Step 2: Service Provider
@@ -19,7 +17,7 @@ composer require laracasts/matryoshka
 For your Laravel app, open `config/app.php` and, within the `providers` array, append:
 
 ```
-Laracasts\Matryoshka\MatryoshkaServiceProvider::class
+Faizanbashir\Cacheable\CacheableServiceProvider::class
 ```
 
 This will bootstrap the package into Laravel.
@@ -62,7 +60,7 @@ Cache::tags('views')->flush();
 
 ### Caching Models
 
-While you're free to hard-code any string for the cache key, the true power of Russian-Doll caching comes into play when we use a timestamp-based approach.
+While you're free to hard-code any string for the cache key, the true power of caching comes into play when we use a timestamp-based approach.
 
 Consider the following fragment:
 
@@ -77,10 +75,10 @@ Consider the following fragment:
 @endcache
 ```
 
-In this example, we're passing the `$post` object, itself, to the `@cache` directive - rather than a string. The package will then look for a `getCacheKey()` method on the model. We've already done that work for you; just have your Eloquent model use the `Laracasts\Matryoshka\Cacheable` trait, like so:
+In this example, we're passing the `$post` object, itself, to the `@cache` directive - rather than a string. The package will then look for a `getCacheKey()` method on the model. We've already done that work for you; just have your Eloquent model use the `Faizanbashir\Cacheable\Cacheable` trait, like so:
 
 ```php
-use Laracasts\Matryoshka\Cacheable;
+use Faizanbashir\Cacheable\Cacheable;
 
 class Post extends Eloquent
 {
@@ -111,7 +109,7 @@ Luckily, Laravel offers this "touch" functionality out of the box. Consider a `N
 
 namespace App;
 
-use Laracasts\Matryoshka\Cacheable;
+use Faizanbashir\Cacheable\Cacheable;
 use Illuminate\Database\Eloquent\Model;
 
 class Note extends Model
@@ -155,7 +153,7 @@ Now, everything is in place. You might render your view, like so:
 @endcache
 ```
 
-Notice the Russian-Doll style cascading for our caches; that's the key. If any note is updated, its individual cache will clear - along with its parent - but any  siblings will remain untouched.
+Notice the style cascading for our caches; that's the key. If any note is updated, its individual cache will clear - along with its parent - but any  siblings will remain untouched.
 
 ### Caching Collections
 
@@ -185,7 +183,7 @@ Yes. Let's say you have:
 @endcache
 ```
 
-Behind the scenes, we'll look for a `getCacheKey` method on the model. Now, as mentioned above, you can use the `Laracasts\Matryoshka\Cacheable` trait to instantly import this functionality. Alternatively, you may pass a second argument to the `@cache` directive, like this:
+Behind the scenes, we'll look for a `getCacheKey` method on the model. Now, as mentioned above, you can use the `Faizanbashir\Cacheable\Cacheable` trait to instantly import this functionality. Alternatively, you may pass a second argument to the `@cache` directive, like this:
 
 ```html
 @cache($post, 'my-custom-key')
@@ -201,5 +199,3 @@ Give these two articles a read:
 
 - https://signalvnoise.com/posts/3112-how-basecamp-next-got-to-be-so-damn-fast-without-using-much-client-side-ui
 - https://signalvnoise.com/posts/3113-how-key-based-cache-expiration-works
-
-And, if you enjoy Laracasts, [watch the creation of this package from scratch here.](https://laracasts.com/series/russian-doll-caching-in-laravel)
